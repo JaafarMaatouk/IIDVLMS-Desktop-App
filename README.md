@@ -1,6 +1,6 @@
 # Intelligent Integrated Driving & Vehicle License Management System (IIDVLMS)
 
-A comprehensive, enterprise-level desktop application designed to automate and streamline the operations of driving and vehicle license departments. Developed as a final-year Software Engineering graduation project at **Al Sham Private University (ASPU)**.
+A comprehensive, enterprise-level desktop application designed to automate and streamline the operations of driving and vehicle license departments.
 
 > **Project Status:** This project is currently in active development. New modules are being added continuously following the Agile methodology.
 
