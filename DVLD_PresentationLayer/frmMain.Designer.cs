@@ -237,6 +237,7 @@
             this.manaToolStripMenuItem.Name = "manaToolStripMenuItem";
             this.manaToolStripMenuItem.Size = new System.Drawing.Size(469, 82);
             this.manaToolStripMenuItem.Text = "Manage Application Types";
+            this.manaToolStripMenuItem.Click += new System.EventHandler(this.manaToolStripMenuItem_Click);
             // 
             // manageTestTypesToolStripMenuItem
             // 
@@ -245,6 +246,7 @@
             this.manageTestTypesToolStripMenuItem.Name = "manageTestTypesToolStripMenuItem";
             this.manageTestTypesToolStripMenuItem.Size = new System.Drawing.Size(469, 82);
             this.manageTestTypesToolStripMenuItem.Text = "Manage Test Types";
+            this.manageTestTypesToolStripMenuItem.Click += new System.EventHandler(this.manageTestTypesToolStripMenuItem_Click);
             // 
             // peopleToolStripMenuItem
             // 
