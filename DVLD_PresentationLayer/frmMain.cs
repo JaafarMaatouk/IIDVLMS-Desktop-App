@@ -1,4 +1,5 @@
-﻿using DVLD_PresentationLayer.Applications.International_License;
+﻿using DVLD_PresentationLayer.Applications.ApplicationTypes;
+using DVLD_PresentationLayer.Applications.International_License;
 using DVLD_PresentationLayer.Applications.Local_Driving_License;
 using DVLD_PresentationLayer.Applications.Renew_Local_License;
 using DVLD_PresentationLayer.Applications.ReplaceLostOrDamagedLicense;
@@ -8,6 +9,7 @@ using DVLD_PresentationLayer.GlobalClasses;
 using DVLD_PresentationLayer.Licenses.Detain_License;
 using DVLD_PresentationLayer.Login;
 using DVLD_PresentationLayer.People;
+using DVLD_PresentationLayer.Tests.TestTypes;
 using DVLD_PresentationLayer.Users;
 using System;
 using System.Collections.Generic;
@@ -127,6 +129,16 @@ namespace DVLD_PresentationLayer
             frm.ShowDialog();
         }
 
-       
+        private void manaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListApplicationTypes f1 = new frmListApplicationTypes();
+            f1.ShowDialog();
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListTestTypes frm = new frmListTestTypes();
+            frm.ShowDialog();
+        }
     }
 }
