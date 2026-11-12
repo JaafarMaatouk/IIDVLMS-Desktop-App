@@ -74,7 +74,7 @@
             this.accountSettingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1924, 80);
+            this.menuStrip1.Size = new System.Drawing.Size(1924, 82);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -90,7 +90,7 @@
             this.applicationsToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.Applecations;
             this.applicationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.applicationsToolStripMenuItem.Name = "applicationsToolStripMenuItem";
-            this.applicationsToolStripMenuItem.Size = new System.Drawing.Size(245, 76);
+            this.applicationsToolStripMenuItem.Size = new System.Drawing.Size(245, 78);
             this.applicationsToolStripMenuItem.Text = "Applications";
             // 
             // drivingLicensesServicesToolStripMenuItem
@@ -252,7 +252,7 @@
             this.peopleToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.People;
             this.peopleToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.peopleToolStripMenuItem.Name = "peopleToolStripMenuItem";
-            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(179, 76);
+            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(179, 78);
             this.peopleToolStripMenuItem.Text = "People";
             this.peopleToolStripMenuItem.Click += new System.EventHandler(this.peopleToolStripMenuItem_Click);
             // 
@@ -262,7 +262,7 @@
             this.driversToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.driver;
             this.driversToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.driversToolStripMenuItem.Name = "driversToolStripMenuItem";
-            this.driversToolStripMenuItem.Size = new System.Drawing.Size(184, 76);
+            this.driversToolStripMenuItem.Size = new System.Drawing.Size(184, 78);
             this.driversToolStripMenuItem.Text = "Drivers";
             this.driversToolStripMenuItem.Click += new System.EventHandler(this.driversToolStripMenuItem_Click);
             // 
@@ -272,7 +272,7 @@
             this.usersToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.Users;
             this.usersToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(164, 76);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(164, 78);
             this.usersToolStripMenuItem.Text = "Users";
             this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
@@ -288,7 +288,7 @@
             this.accountSettingsToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.account_settings;
             this.accountSettingsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.accountSettingsToolStripMenuItem.Name = "accountSettingsToolStripMenuItem";
-            this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(296, 76);
+            this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(296, 78);
             this.accountSettingsToolStripMenuItem.Text = "Account Settings";
             // 
             // currentUserInfoToolStripMenuItem
@@ -329,9 +329,9 @@
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = global::DVLD_PresentationLayer.Properties.Resources.MainPicture2;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 80);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 82);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1924, 970);
+            this.pictureBox1.Size = new System.Drawing.Size(1924, 968);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
