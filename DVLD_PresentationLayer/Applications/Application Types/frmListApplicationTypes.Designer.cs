@@ -60,7 +60,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editApplicationTypeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(260, 69);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(260, 36);
             // 
             // editApplicationTypeToolStripMenuItem
             // 
@@ -107,9 +107,9 @@
             this.btnClose.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::DVLD_PresentationLayer.Properties.Resources.Close_32;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(750, 507);
+            this.btnClose.Location = new System.Drawing.Point(735, 507);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(101, 37);
+            this.btnClose.Size = new System.Drawing.Size(116, 37);
             this.btnClose.TabIndex = 8;
             this.btnClose.Text = "Close";
             this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.dgvTestTypes = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editTestTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.lblRecord = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.editTestTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClose = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestTypes)).BeginInit();
@@ -60,7 +60,15 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editTestTypeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(249, 69);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(200, 36);
+            // 
+            // editTestTypeToolStripMenuItem
+            // 
+            this.editTestTypeToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.Details;
+            this.editTestTypeToolStripMenuItem.Name = "editTestTypeToolStripMenuItem";
+            this.editTestTypeToolStripMenuItem.Size = new System.Drawing.Size(199, 32);
+            this.editTestTypeToolStripMenuItem.Text = "&Edit Test Type";
+            this.editTestTypeToolStripMenuItem.Click += new System.EventHandler(this.editTestTypeToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -93,14 +101,6 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Records:";
             // 
-            // editTestTypeToolStripMenuItem
-            // 
-            this.editTestTypeToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.Details;
-            this.editTestTypeToolStripMenuItem.Name = "editTestTypeToolStripMenuItem";
-            this.editTestTypeToolStripMenuItem.Size = new System.Drawing.Size(248, 32);
-            this.editTestTypeToolStripMenuItem.Text = "&Edit Test Type";
-            this.editTestTypeToolStripMenuItem.Click += new System.EventHandler(this.editTestTypeToolStripMenuItem_Click);
-            // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -108,9 +108,9 @@
             this.btnClose.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::DVLD_PresentationLayer.Properties.Resources.Close_32;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(832, 509);
+            this.btnClose.Location = new System.Drawing.Point(796, 509);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(87, 47);
+            this.btnClose.Size = new System.Drawing.Size(123, 47);
             this.btnClose.TabIndex = 10;
             this.btnClose.Text = "Close";
             this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
