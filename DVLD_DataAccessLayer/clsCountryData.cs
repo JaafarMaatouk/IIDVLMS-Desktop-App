@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 
-
 namespace DVLD_DataAccessLayer
 {
     public class clsCountryData
@@ -10,42 +9,24 @@ namespace DVLD_DataAccessLayer
         public static bool GetCountryInfoByID(int ID, ref string CountryName)
         {
             bool isFound = false;
-
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = "SELECT * FROM Countries WHERE CountryID = @CountryID";
-
+            string query = "SELECT * FROM Governorates WHERE GovernorateID = @GovernorateID";
             SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@CountryID", ID);
+            command.Parameters.AddWithValue("@GovernorateID", ID);
 
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-
                 if (reader.Read())
                 {
-
-                    // The record was found
                     isFound = true;
-
-                    CountryName = (string)reader["CountryName"];
-
+                    CountryName = (string)reader["GovernorateName"];
                 }
-                else
-                {
-                    // The record was not found
-                    isFound = false;
-                }
-
                 reader.Close();
-
-
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("Error: " + ex.Message);
                 isFound = false;
             }
             finally
@@ -59,42 +40,24 @@ namespace DVLD_DataAccessLayer
         public static bool GetCountryInfoByName(string CountryName, ref int ID)
         {
             bool isFound = false;
-
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = "SELECT * FROM Countries WHERE CountryName = @CountryName";
-
+            string query = "SELECT * FROM Governorates WHERE GovernorateName = @GovernorateName";
             SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@CountryName", CountryName);
+            command.Parameters.AddWithValue("@GovernorateName", CountryName);
 
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-
                 if (reader.Read())
                 {
-
-                    // The record was found
                     isFound = true;
-
-                    ID = (int)reader["CountryID"];
-
+                    ID = (int)reader["GovernorateID"];
                 }
-                else
-                {
-                    // The record was not found
-                    isFound = false;
-                }
-
                 reader.Close();
-
-
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("Error: " + ex.Message);
                 isFound = false;
             }
             finally
@@ -107,43 +70,26 @@ namespace DVLD_DataAccessLayer
 
         public static DataTable GetAllCountries()
         {
-
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = "SELECT * FROM Countries order by CountryName";
-
+            string query = "SELECT GovernorateID AS CountryID, GovernorateName AS CountryName FROM Governorates ORDER BY GovernorateID";
             SqlCommand command = new SqlCommand(query, connection);
 
             try
             {
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
-
                 if (reader.HasRows)
-
-                {
                     dt.Load(reader);
-                }
-
                 reader.Close();
-
-
             }
-
-            catch (Exception ex)
-            {
-                // Console.WriteLine("Error: " + ex.Message);
-            }
+            catch (Exception ex) { }
             finally
             {
                 connection.Close();
             }
 
             return dt;
-
         }
-
     }
 }

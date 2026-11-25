@@ -1,4 +1,4 @@
-﻿using DVLD_BuisnessLayer;
+﻿using DVLD_BussnessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,6 +64,9 @@ namespace DVLD_PresentationLayer.Users
             lblIsActive.Text = "[???]";
         }
 
-       
+        private void gbLoginInfo_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

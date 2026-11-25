@@ -1,4 +1,5 @@
 ﻿using DVLD_BuisnessLayer;
+using DVLD_BussnessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +27,13 @@ namespace DVLD_PresentationLayer.Users
 
             _Mode = enMode.AddNew;
         }
-
+        private void _FillRolesInComoboBox()
+        {
+            DataTable dtRoles = clsRole.GetAllRoles();
+            cbRoles.DataSource = dtRoles;
+            cbRoles.DisplayMember = "RoleName";
+            cbRoles.ValueMember = "RoleID";
+        }
         public frmAddUpdateUser(int UserID)
         {
             InitializeComponent();
@@ -37,7 +44,9 @@ namespace DVLD_PresentationLayer.Users
 
         private void _ResetDefualtValues()
         {
-            //this will initialize the reset the defaule values
+            _FillRolesInComoboBox();
+            if (cbRoles.Items.Count > 0)
+                cbRoles.SelectedIndex = 0;
 
             if (_Mode == enMode.AddNew)
             {
@@ -88,6 +97,7 @@ namespace DVLD_PresentationLayer.Users
             txtPassword.Text = _User.Password;
             txtConfirmPassword.Text = _User.Password;
             chkIsActive.Checked = _User.IsActive;
+            cbRoles.SelectedValue = _User.RoleID;
             ctrlPersonCardWithFilter1.LoadPersonInfo(_User.PersonID);
         }
 
@@ -250,7 +260,7 @@ namespace DVLD_PresentationLayer.Users
             _User.UserName = txtUserName.Text.Trim();
             _User.Password = txtPassword.Text.Trim();
             _User.IsActive = chkIsActive.Checked;
-
+            _User.RoleID = Convert.ToInt32(cbRoles.SelectedValue);
 
             if (_User.Save())
             {

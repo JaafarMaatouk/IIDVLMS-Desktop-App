@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DVLD_BuisnessLayer;
+using DVLD_BussnessLayer;
 
 namespace DVLD_PresentationLayer.People
 {
