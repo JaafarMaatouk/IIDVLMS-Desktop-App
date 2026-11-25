@@ -60,6 +60,7 @@
     <Compile Include="clsTrafficViolation.cs" />
     <Compile Include="clsUser.cs" />
     <Compile Include="clsVehicle.cs" />
+    <Compile Include="clsVehicleHistory.cs" />
     <Compile Include="clsVehicleOwnership.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

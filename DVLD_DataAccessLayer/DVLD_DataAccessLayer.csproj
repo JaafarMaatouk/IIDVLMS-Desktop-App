@@ -61,6 +61,7 @@
     <Compile Include="clsTrafficViolationData.cs" />
     <Compile Include="clsUserData.cs" />
     <Compile Include="clsVehicleData.cs" />
+    <Compile Include="clsVehicleHistoryData.cs" />
     <Compile Include="clsVehicleOwnershipData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
