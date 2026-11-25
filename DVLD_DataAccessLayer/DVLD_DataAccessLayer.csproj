@@ -46,6 +46,7 @@
     <Compile Include="clsCountryData.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
     <Compile Include="clsDetainedLicenseData.cs" />
+    <Compile Include="clsDetainedVehicleData.cs" />
     <Compile Include="clsDriverData.cs" />
     <Compile Include="clsInternationalLicenseData.cs" />
     <Compile Include="clsLicenseClassData.cs" />
@@ -53,9 +54,11 @@
     <Compile Include="clsLocalDrivingLicenseApplicationData.cs" />
     <Compile Include="clsPersonData.cs" />
     <Compile Include="clsRoleData.cs" />
+    <Compile Include="clsTechnicalInspectionData.cs" />
     <Compile Include="clsTestAppointmentData.cs" />
     <Compile Include="clsTestData.cs" />
     <Compile Include="clsTestTypeData.cs" />
+    <Compile Include="clsTrafficViolationData.cs" />
     <Compile Include="clsUserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
