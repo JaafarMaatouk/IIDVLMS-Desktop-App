@@ -153,6 +153,16 @@ namespace DVLD_PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap black_car {
+            get {
+                object obj = ResourceManager.GetObject("black_car", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap boy {
             get {
                 object obj = ResourceManager.GetObject("boy", resourceCulture);
