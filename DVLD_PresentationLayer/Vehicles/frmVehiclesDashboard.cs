@@ -154,6 +154,7 @@ namespace DVLD_PresentationLayer.Vehicles
                 _activeButton.BackColor = _clrDarkCharcoal;
                 _activeButton.ForeColor = Color.FromArgb(230, 228, 222);
                 _activeButton.Font = new Font("Segoe UI", 9.8F, FontStyle.Regular);
+                _activeButton.FlatAppearance.MouseOverBackColor = _clrSidebarHover;
             }
 
             _activeButton = selectedBtn;
@@ -162,6 +163,7 @@ namespace DVLD_PresentationLayer.Vehicles
                 _activeButton.BackColor = _clrWarmGold;
                 _activeButton.ForeColor = Color.FromArgb(20, 25, 31);
                 _activeButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+                _activeButton.FlatAppearance.MouseOverBackColor = _clrWarmGold;
             }
         }
 
@@ -219,27 +221,27 @@ namespace DVLD_PresentationLayer.Vehicles
 
                 case "TransferOwnership":
                     _HighlightActiveButton(btnTransferOwnership);
-                    _ShowComingSoonModule("Vehicle Ownership Transfer", "Will be added in the next branch.");
+                    _OpenChildForm(new frmTransferVehicleOwnership());
                     break;
 
                 case "Inspections":
                     _HighlightActiveButton(btnInspections);
-                    _ShowComingSoonModule("Technical Inspections", "Will be added in the next branch.");
+                    _OpenChildForm(new frmManageInspections());
                     break;
 
                 case "Violations":
                     _HighlightActiveButton(btnViolations);
-                    _ShowComingSoonModule("Traffic Violations", "Will be added in the next branch.");
+                    _OpenChildForm(new frmManageViolations());
                     break;
 
                 case "DetainRelease":
                     _HighlightActiveButton(btnDetainRelease);
-                    _ShowComingSoonModule("Detain & Release Vehicles", "Will be added in the next branch.");
+                    _OpenChildForm(new frmManageDetainedVehicles());
                     break;
 
                 case "FullHistory":
                     _HighlightActiveButton(btnFullHistory);
-                    _ShowComingSoonModule("Vehicle Full History", "Will be added in the final branch.");
+                    _OpenChildForm(new frmVehicleFullHistory());
                     break;
             }
         }
