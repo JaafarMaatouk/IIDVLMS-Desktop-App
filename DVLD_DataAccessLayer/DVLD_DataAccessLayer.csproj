@@ -60,6 +60,8 @@
     <Compile Include="clsTestTypeData.cs" />
     <Compile Include="clsTrafficViolationData.cs" />
     <Compile Include="clsUserData.cs" />
+    <Compile Include="clsVehicleData.cs" />
+    <Compile Include="clsVehicleOwnershipData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
