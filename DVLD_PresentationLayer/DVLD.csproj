@@ -346,6 +346,12 @@
     <Compile Include="Vehicles\frmTransferVehicleOwnership.Designer.cs">
       <DependentUpon>frmTransferVehicleOwnership.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vehicles\frmVehicleFullHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vehicles\frmVehicleFullHistory.Designer.cs">
+      <DependentUpon>frmVehicleFullHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vehicles\frmVehiclesDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
