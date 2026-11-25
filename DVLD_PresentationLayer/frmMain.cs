@@ -192,5 +192,11 @@ namespace DVLD_PresentationLayer
             frmReleaseDetainedLicenseApplication frm = new frmReleaseDetainedLicenseApplication();
             frm.ShowDialog();
         }
+
+        private void vehiclesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Vehicles.frmVehiclesDashboard frm = new Vehicles.frmVehiclesDashboard();
+            frm.ShowDialog();
+        }
     }
 }
