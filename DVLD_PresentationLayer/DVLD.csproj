@@ -322,6 +322,30 @@
     <Compile Include="Vehicles\frmListVehicles.Designer.cs">
       <DependentUpon>frmListVehicles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vehicles\frmManageDetainedVehicles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vehicles\frmManageDetainedVehicles.Designer.cs">
+      <DependentUpon>frmManageDetainedVehicles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicles\frmManageInspections.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vehicles\frmManageInspections.Designer.cs">
+      <DependentUpon>frmManageInspections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicles\frmManageViolations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vehicles\frmManageViolations.Designer.cs">
+      <DependentUpon>frmManageViolations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicles\frmTransferVehicleOwnership.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vehicles\frmTransferVehicleOwnership.Designer.cs">
+      <DependentUpon>frmTransferVehicleOwnership.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vehicles\frmVehiclesDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
