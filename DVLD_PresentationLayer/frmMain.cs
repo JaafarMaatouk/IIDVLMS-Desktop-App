@@ -174,5 +174,23 @@ namespace DVLD_PresentationLayer
             applicationsToolStripMenuItem.DropDownItems[3].Enabled = (role.CanManageLicensesAndApps || role.CanManageUsersAndSettings); // Manage Application Types
             manageTestTypesToolStripMenuItem.Enabled = (role.CanManageLicensesAndApps || role.CanManageUsersAndSettings); // Manage Test Types
         }
+
+        private void mangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDetainedLicenses frm = new frmListDetainedLicenses();
+            frm.ShowDialog();
+        }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicenseApplication frm = new frmDetainLicenseApplication();
+            frm.ShowDialog();
+        }
+
+        private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicenseApplication frm = new frmReleaseDetainedLicenseApplication();
+            frm.ShowDialog();
+        }
     }
 }

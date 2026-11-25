@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.applicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drivingLicensesServicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newDrivingLicensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +57,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vehiclesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -79,18 +79,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1924, 80);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::DVLD_PresentationLayer.Properties.Resources.MainPicture2;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 80);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1924, 970);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // applicationsToolStripMenuItem
             // 
@@ -227,6 +215,7 @@
             this.mangeToolStripMenuItem.Name = "mangeToolStripMenuItem";
             this.mangeToolStripMenuItem.Size = new System.Drawing.Size(424, 42);
             this.mangeToolStripMenuItem.Text = "Mange  Detained Licenses";
+            this.mangeToolStripMenuItem.Click += new System.EventHandler(this.mangeToolStripMenuItem_Click);
             // 
             // detainLicenseToolStripMenuItem
             // 
@@ -235,6 +224,7 @@
             this.detainLicenseToolStripMenuItem.Name = "detainLicenseToolStripMenuItem";
             this.detainLicenseToolStripMenuItem.Size = new System.Drawing.Size(424, 42);
             this.detainLicenseToolStripMenuItem.Text = "Detain License ";
+            this.detainLicenseToolStripMenuItem.Click += new System.EventHandler(this.detainLicenseToolStripMenuItem_Click);
             // 
             // releaseDetainedLicenseToolStripMenuItem
             // 
@@ -243,6 +233,7 @@
             this.releaseDetainedLicenseToolStripMenuItem.Name = "releaseDetainedLicenseToolStripMenuItem";
             this.releaseDetainedLicenseToolStripMenuItem.Size = new System.Drawing.Size(424, 42);
             this.releaseDetainedLicenseToolStripMenuItem.Text = "Release Detained License";
+            this.releaseDetainedLicenseToolStripMenuItem.Click += new System.EventHandler(this.releaseDetainedLicenseToolStripMenuItem_Click);
             // 
             // manaToolStripMenuItem
             // 
@@ -350,6 +341,18 @@
             this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
             this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(145, 76);
             this.vehiclesToolStripMenuItem.Text = "Vehicles";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::DVLD_PresentationLayer.Properties.Resources.MainPicture2;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 80);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1924, 970);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // frmMain
             // 
