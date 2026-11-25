@@ -1,10 +1,8 @@
-﻿using DVLD_DataAccessLayer;
-using System;
+﻿using System;
 using System.Data;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using DVLD_DataAccessLayer;
 
-namespace DVLD_BuisnessLayer
+namespace DVLD_BussnessLayer
 {
     public class clsUser
     {
@@ -14,93 +12,83 @@ namespace DVLD_BuisnessLayer
         public int UserID { set; get; }
         public int PersonID { set; get; }
         public clsPerson PersonInfo;
+        public int RoleID { set; get; }
+        public clsRole RoleInfo;
         public string UserName { set; get; }
         public string Password { set; get; }
         public bool IsActive { set; get; }
 
         public clsUser()
-
         {
             this.UserID = -1;
+            this.PersonID = -1;
+            this.RoleID = 2;
             this.UserName = "";
             this.Password = "";
             this.IsActive = true;
             Mode = enMode.AddNew;
         }
 
-        private clsUser(int UserID, int PersonID, string Username, string Password,
-            bool IsActive)
-
+        private clsUser(int UserID, int PersonID, int RoleID, string Username, string Password, bool IsActive)
         {
             this.UserID = UserID;
             this.PersonID = PersonID;
             this.PersonInfo = clsPerson.Find(PersonID);
+            this.RoleID = RoleID;
+            this.RoleInfo = clsRole.Find(RoleID);
             this.UserName = Username;
             this.Password = Password;
             this.IsActive = IsActive;
-
             Mode = enMode.Update;
         }
 
         private bool _AddNewUser()
         {
-            //call DataAccess Layer 
-
-            this.UserID = clsUserData.AddNewUser(this.PersonID, this.UserName,
-                this.Password, this.IsActive);
-
+            this.UserID = clsUserData.AddNewUser(this.PersonID, this.RoleID, this.UserName, this.Password, this.IsActive);
+            if (this.UserID != -1)
+                this.RoleInfo = clsRole.Find(this.RoleID);
             return (this.UserID != -1);
         }
+
         private bool _UpdateUser()
         {
-            //call DataAccess Layer 
-
-            return clsUserData.UpdateUser(this.UserID, this.PersonID, this.UserName,
-                this.Password, this.IsActive);
+            bool updated = clsUserData.UpdateUser(this.UserID, this.PersonID, this.RoleID, this.UserName, this.Password, this.IsActive);
+            if (updated)
+                this.RoleInfo = clsRole.Find(this.RoleID);
+            return updated;
         }
+
         public static clsUser FindByUserID(int UserID)
         {
-            int PersonID = -1;
+            int PersonID = -1, RoleID = -1;
             string UserName = "", Password = "";
             bool IsActive = false;
 
-            bool IsFound = clsUserData.GetUserInfoByUserID
-                                (UserID, ref PersonID, ref UserName, ref Password, ref IsActive);
-
-            if (IsFound)
-                //we return new object of that User with the right data
-                return new clsUser(UserID, PersonID, UserName, Password, IsActive);
+            if (clsUserData.GetUserInfoByUserID(UserID, ref PersonID, ref RoleID, ref UserName, ref Password, ref IsActive))
+                return new clsUser(UserID, PersonID, RoleID, UserName, Password, IsActive);
             else
                 return null;
         }
+
         public static clsUser FindByPersonID(int PersonID)
         {
-            int UserID = -1;
+            int UserID = -1, RoleID = -1;
             string UserName = "", Password = "";
             bool IsActive = false;
 
-            bool IsFound = clsUserData.GetUserInfoByPersonID
-                                (PersonID, ref UserID, ref UserName, ref Password, ref IsActive);
-
-            if (IsFound)
-                //we return new object of that User with the right data
-                return new clsUser(UserID, UserID, UserName, Password, IsActive);
+            if (clsUserData.GetUserInfoByPersonID(PersonID, ref UserID, ref RoleID, ref UserName, ref Password, ref IsActive))
+                return new clsUser(UserID, PersonID, RoleID, UserName, Password, IsActive);
             else
                 return null;
         }
+
         public static clsUser FindByUsernameAndPassword(string UserName, string Password)
         {
-            int UserID = -1;
-            int PersonID = -1;
-
+            int UserID = -1, PersonID = -1, RoleID = -1;
             bool IsActive = false;
 
-            bool IsFound = clsUserData.GetUserInfoByUsernameAndPassword
-                                (UserName, Password, ref UserID, ref PersonID, ref IsActive);
-
-            if (IsFound)
-                //we return new object of that User with the right data
-                return new clsUser(UserID, PersonID, UserName, Password, IsActive);
+            if (clsUserData.GetUserInfoByUsernameAndPassword(UserName, Password, ref UserID, ref PersonID, ref RoleID, ref IsActive))
+                return new clsUser(UserID, PersonID, RoleID, UserName, Password, IsActive);
             else
                 return null;
         }
@@ -112,21 +100,15 @@ namespace DVLD_BuisnessLayer
                 case enMode.AddNew:
                     if (_AddNewUser())
                     {
-
                         Mode = enMode.Update;
                         return true;
                     }
                     else
-                    {
                         return false;
-                    }
 
                 case enMode.Update:
-
                     return _UpdateUser();
-
             }
-
             return false;
         }
 
@@ -155,6 +137,9 @@ namespace DVLD_BuisnessLayer
             return clsUserData.IsUserExistForPersonID(PersonID);
         }
 
-       
+        public bool ChangePassword(string NewPassword)
+        {
+            return clsUserData.ChangePassword(this.UserID, NewPassword);
+        }
     }
 }

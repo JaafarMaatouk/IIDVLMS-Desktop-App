@@ -1,4 +1,4 @@
-﻿using DVLD_BuisnessLayer;
+﻿using DVLD_BussnessLayer;
 using DVLD_PresentationLayer.GlobalClasses;
 using DVLD_PresentationLayer.Properties;
 using System;

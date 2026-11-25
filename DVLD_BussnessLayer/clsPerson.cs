@@ -4,7 +4,7 @@ using System.Data;
 using System.Xml.Linq;
 
 
-namespace DVLD_BuisnessLayer
+namespace DVLD_BussnessLayer
 {
     public class clsPerson
     {

@@ -1,4 +1,5 @@
-﻿using DVLD_PresentationLayer.Applications.ApplicationTypes;
+﻿using DVLD_BussnessLayer;
+using DVLD_PresentationLayer.Applications.ApplicationTypes;
 using DVLD_PresentationLayer.Applications.International_License;
 using DVLD_PresentationLayer.Applications.Local_Driving_License;
 using DVLD_PresentationLayer.Applications.Renew_Local_License;
@@ -31,6 +32,7 @@ namespace DVLD_PresentationLayer
         {
             InitializeComponent();
             _frmLogin = frm;
+            _ApplyPermissions();
 
         }
 
@@ -139,6 +141,38 @@ namespace DVLD_PresentationLayer
         {
             frmListTestTypes frm = new frmListTestTypes();
             frm.ShowDialog();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void _ApplyPermissions()
+        {
+            if (clsGlobal.CurrentUser == null)
+                return;
+
+            if (clsGlobal.CurrentUser.RoleInfo == null)
+                clsGlobal.CurrentUser.RoleInfo = clsRole.Find(clsGlobal.CurrentUser.RoleID);
+
+            if (clsGlobal.CurrentUser.RoleInfo == null)
+                return;
+
+            var role = clsGlobal.CurrentUser.RoleInfo;
+
+            // 1. القوائم الرئيسية في الشريط العلوي
+            applicationsToolStripMenuItem.Enabled = (role.CanManageLicensesAndApps || role.CanManageTests);
+            peopleToolStripMenuItem.Enabled = (role.CanManageLicensesAndApps || role.CanManageUsersAndSettings);
+            driversToolStripMenuItem.Enabled = (role.CanManageLicensesAndApps || role.CanManageVehicles);
+            usersToolStripMenuItem.Enabled = role.CanManageUsersAndSettings;
+            vehiclesToolStripMenuItem.Enabled = role.CanManageVehicles;
+            // 2. القوائم الفرعية داخل Applications (مفعّلة لموظف الرخص والمدير)
+            drivingLicensesServicesToolStripMenuItem.Enabled = role.CanManageLicensesAndApps;
+            manageApplicationsToolStripMenuItem.Enabled = (role.CanManageLicensesAndApps || role.CanManageTests);
+            detainLicensesToolStripMenuItem.Enabled = role.CanManageLicensesAndApps;
+            applicationsToolStripMenuItem.DropDownItems[3].Enabled = (role.CanManageLicensesAndApps || role.CanManageUsersAndSettings); // Manage Application Types
+            manageTestTypesToolStripMenuItem.Enabled = (role.CanManageLicensesAndApps || role.CanManageUsersAndSettings); // Manage Test Types
         }
     }
 }

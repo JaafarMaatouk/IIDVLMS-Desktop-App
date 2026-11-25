@@ -54,6 +54,7 @@
             this.gbLoginInfo.TabIndex = 1;
             this.gbLoginInfo.TabStop = false;
             this.gbLoginInfo.Text = "Login Information";
+            this.gbLoginInfo.Enter += new System.EventHandler(this.gbLoginInfo_Enter);
             // 
             // label3
             // 
