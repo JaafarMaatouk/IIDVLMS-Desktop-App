@@ -295,17 +295,68 @@ namespace DVLD_PresentationLayer.Vehicles
             }
         }
 
+        private string _FindColumnName(DataGridView dgv, params string[] candidates)
+        {
+            foreach (DataGridViewColumn col in dgv.Columns)
+            {
+                string normalized = col.Name.Replace(" ", "").Replace("_", "");
+                foreach (string candidate in candidates)
+                {
+                    if (normalized.Equals(candidate, StringComparison.OrdinalIgnoreCase))
+                        return col.Name;
+                }
+            }
+            return null;
+        }
+
+        private string _FindDataTableColumnName(DataTable dt, params string[] candidates)
+        {
+            if (dt == null) return null;
+            foreach (DataColumn col in dt.Columns)
+            {
+                string normalized = col.ColumnName.Replace(" ", "").Replace("_", "");
+                foreach (string candidate in candidates)
+                {
+                    if (normalized.Equals(candidate, StringComparison.OrdinalIgnoreCase))
+                        return col.ColumnName;
+                }
+            }
+            return null;
+        }
+
         private void DgvDetained_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvDetained.CurrentRow == null) return;
+            if (dgvDetained.CurrentRow == null || dgvDetained.Columns.Count == 0) return;
 
-            bool isReleased = Convert.ToBoolean(dgvDetained.CurrentRow.Cells["IsReleased"].Value);
-            int detainID = Convert.ToInt32(dgvDetained.CurrentRow.Cells["DetainID"].Value);
-            string plate = dgvDetained.Columns.Contains("PlateNumber")
-                ? dgvDetained.CurrentRow.Cells["PlateNumber"].Value.ToString()
-                : $"Vehicle #{dgvDetained.CurrentRow.Cells["VehicleID"].Value}";
+            string releasedCol = _FindColumnName(dgvDetained, "IsReleased", "Released");
+            string releaseDateCol = _FindColumnName(dgvDetained, "ReleaseDate");
+            string detainIdCol = _FindColumnName(dgvDetained, "DetainID", "ID");
+            string plateCol = _FindColumnName(dgvDetained, "PlateNumber", "PlateNo");
+            string vehicleIdCol = _FindColumnName(dgvDetained, "VehicleID");
 
-            if (!isReleased)
+            bool isReleased = false;
+            if (releasedCol != null && dgvDetained.CurrentRow.Cells[releasedCol].Value != null && dgvDetained.CurrentRow.Cells[releasedCol].Value != DBNull.Value)
+            {
+                isReleased = Convert.ToBoolean(dgvDetained.CurrentRow.Cells[releasedCol].Value);
+            }
+            else if (releaseDateCol != null)
+            {
+                object relDateVal = dgvDetained.CurrentRow.Cells[releaseDateCol].Value;
+                isReleased = (relDateVal != null && relDateVal != DBNull.Value && !string.IsNullOrWhiteSpace(relDateVal.ToString()));
+            }
+
+            object idVal = detainIdCol != null ? dgvDetained.CurrentRow.Cells[detainIdCol].Value : dgvDetained.CurrentRow.Cells[0].Value;
+            int detainID = (idVal != null && idVal != DBNull.Value) ? Convert.ToInt32(idVal) : -1;
+
+            string plate;
+            if (plateCol != null && dgvDetained.CurrentRow.Cells[plateCol].Value != null)
+                plate = dgvDetained.CurrentRow.Cells[plateCol].Value.ToString();
+            else if (vehicleIdCol != null && dgvDetained.CurrentRow.Cells[vehicleIdCol].Value != null)
+                plate = $"Vehicle #{dgvDetained.CurrentRow.Cells[vehicleIdCol].Value}";
+            else
+                plate = "Selected Vehicle";
+
+            if (!isReleased && detainID != -1)
             {
                 _selectedDetainID = detainID;
                 lblSelectedDetainVal.Text = $"Selected Detain ID #{detainID} | Plate: {plate} (Active Detention)";
@@ -351,21 +402,34 @@ namespace DVLD_PresentationLayer.Vehicles
             dgvDetained.DataSource = _dtDetained;
             foreach (DataGridViewColumn col in dgvDetained.Columns)
                 col.Width = 145;
-            if (dgvDetained.Columns.Contains("DetainID")) dgvDetained.Columns["DetainID"].Width = 85;
-            if (dgvDetained.Columns.Contains("DetainReason")) dgvDetained.Columns["DetainReason"].Width = 230;
-            if (dgvDetained.Columns.Contains("Notes")) dgvDetained.Columns["Notes"].Width = 210;
             _ApplyFilter();
         }
 
         private void _ApplyFilter()
         {
             if (_dtDetained == null) return;
+
+            string releasedCol = _FindDataTableColumnName(_dtDetained, "IsReleased", "Released");
+            string releaseDateCol = _FindDataTableColumnName(_dtDetained, "ReleaseDate");
+
             if (cmbFilter.SelectedIndex == 1)
-                _dtDetained.DefaultView.RowFilter = "IsReleased = false";
+            {
+                if (releasedCol != null)
+                    _dtDetained.DefaultView.RowFilter = $"[{releasedCol}] = false";
+                else if (releaseDateCol != null)
+                    _dtDetained.DefaultView.RowFilter = $"[{releaseDateCol}] IS NULL";
+            }
             else if (cmbFilter.SelectedIndex == 2)
-                _dtDetained.DefaultView.RowFilter = "IsReleased = true";
+            {
+                if (releasedCol != null)
+                    _dtDetained.DefaultView.RowFilter = $"[{releasedCol}] = true";
+                else if (releaseDateCol != null)
+                    _dtDetained.DefaultView.RowFilter = $"[{releaseDateCol}] IS NOT NULL";
+            }
             else
+            {
                 _dtDetained.DefaultView.RowFilter = "";
+            }
         }
     }
 }
