@@ -285,25 +285,74 @@ namespace DVLD_PresentationLayer.Vehicles
             }
         }
 
+        private string _FindViolationsColumn(params string[] candidates)
+        {
+            if (_dtViolations == null) return null;
+            foreach (DataColumn col in _dtViolations.Columns)
+            {
+                string normalized = col.ColumnName.Replace(" ", "").Replace("_", "");
+                foreach (string candidate in candidates)
+                {
+                    if (normalized.Equals(candidate, StringComparison.OrdinalIgnoreCase))
+                        return col.ColumnName;
+                }
+            }
+            return null;
+        }
+
         private void _PaySelectedViolation()
         {
-            if (dgvViolations.CurrentRow == null)
+            if (dgvViolations.CurrentRow == null || _dtViolations == null)
             {
                 MessageBox.Show("Please select a violation row from the table.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            bool isPaid = Convert.ToBoolean(dgvViolations.CurrentRow.Cells["IsPaid"].Value);
+            string statusCol = _FindViolationsColumn("IsPaid", "Paid", "PaymentStatus", "Status", "PaymentDate");
+            bool isPaid = false;
+
+            if (statusCol != null)
+            {
+                object rawVal = dgvViolations.CurrentRow.Cells[statusCol].Value;
+                Type colType = _dtViolations.Columns[statusCol].DataType;
+
+                if (rawVal != null && rawVal != DBNull.Value)
+                {
+                    if (colType == typeof(bool))
+                        isPaid = Convert.ToBoolean(rawVal);
+                    else if (colType == typeof(DateTime))
+                        isPaid = true;
+                    else
+                    {
+                        string s = rawVal.ToString().Trim();
+                        isPaid = s.Equals("Paid", StringComparison.OrdinalIgnoreCase)
+                              || s.Equals("True", StringComparison.OrdinalIgnoreCase)
+                              || s.Equals("Yes", StringComparison.OrdinalIgnoreCase)
+                              || s == "1";
+                    }
+                }
+            }
+
             if (isPaid)
             {
                 MessageBox.Show("This violation is already paid.", "Already Paid", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            int violationID = Convert.ToInt32(dgvViolations.CurrentRow.Cells["ViolationID"].Value);
-            string fine = dgvViolations.CurrentRow.Cells["FineAmount"].Value.ToString();
+            string idCol = _FindViolationsColumn("ViolationID", "ID");
+            object idVal = idCol != null ? dgvViolations.CurrentRow.Cells[idCol].Value : dgvViolations.CurrentRow.Cells[0].Value;
+            int violationID = Convert.ToInt32(idVal);
 
-            if (MessageBox.Show($"Confirm payment of ${fine} for Violation ID #{violationID}?", "Confirm Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            string fineCol = _FindViolationsColumn("FineAmount", "Fine", "Amount", "Fees");
+            string fine = (fineCol != null && dgvViolations.CurrentRow.Cells[fineCol].Value != null)
+                ? dgvViolations.CurrentRow.Cells[fineCol].Value.ToString()
+                : "";
+
+            string confirmMsg = string.IsNullOrEmpty(fine)
+                ? $"Confirm payment for Violation ID #{violationID}?"
+                : $"Confirm payment of ${fine} for Violation ID #{violationID}?";
+
+            if (MessageBox.Show(confirmMsg, "Confirm Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (clsTrafficViolation.PayViolation(violationID))
                 {
@@ -333,12 +382,33 @@ namespace DVLD_PresentationLayer.Vehicles
         private void _ApplyFilter()
         {
             if (_dtViolations == null) return;
-            if (cmbStatusFilter.SelectedIndex == 1)
-                _dtViolations.DefaultView.RowFilter = "IsPaid = false";
-            else if (cmbStatusFilter.SelectedIndex == 2)
-                _dtViolations.DefaultView.RowFilter = "IsPaid = true";
-            else
+
+            string statusCol = _FindViolationsColumn("IsPaid", "Paid", "PaymentStatus", "Status", "PaymentDate");
+            if (statusCol == null || cmbStatusFilter.SelectedIndex == 0)
+            {
                 _dtViolations.DefaultView.RowFilter = "";
+                return;
+            }
+
+            Type colType = _dtViolations.Columns[statusCol].DataType;
+            if (cmbStatusFilter.SelectedIndex == 1) // Unpaid
+            {
+                if (colType == typeof(bool))
+                    _dtViolations.DefaultView.RowFilter = $"[{statusCol}] = false";
+                else if (colType == typeof(DateTime))
+                    _dtViolations.DefaultView.RowFilter = $"[{statusCol}] IS NULL";
+                else
+                    _dtViolations.DefaultView.RowFilter = $"[{statusCol}] <> 'Paid'";
+            }
+            else if (cmbStatusFilter.SelectedIndex == 2) // Paid
+            {
+                if (colType == typeof(bool))
+                    _dtViolations.DefaultView.RowFilter = $"[{statusCol}] = true";
+                else if (colType == typeof(DateTime))
+                    _dtViolations.DefaultView.RowFilter = $"[{statusCol}] IS NOT NULL";
+                else
+                    _dtViolations.DefaultView.RowFilter = $"[{statusCol}] = 'Paid'";
+            }
         }
     }
 }
